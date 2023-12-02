@@ -23,9 +23,9 @@ jobs:
         run: cd $GITHUB_WORKSPACE
 
       - name: Restore Packages
-        run: nuget restore PrimeiroMVC5.sln
+        run: nuget restore FunctionalAppMVC5.sln
 
       - name: Build Solution
         run: |
-          msbuild.exe PrimeiroMVC5.sln /p:platform="Any CPU" /p:configuration="Release"
+          msbuild.exe FunctionalAppMVC5.sln /p:platform="Any CPU" /p:configuration="Release"
         
