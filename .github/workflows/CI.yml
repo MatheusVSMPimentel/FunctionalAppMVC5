@@ -1,0 +1,31 @@
+name: Build and Tests
+
+on:  
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:  
+  build:    
+    runs-on: windows-latest
+    
+    steps:      
+      - uses: actions/checkout@v2
+      
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1
+
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1.0.5
+
+      - name: Navigate to Workspace
+        run: cd $GITHUB_WORKSPACE
+
+      - name: Restore Packages
+        run: nuget restore PrimeiroMVC5.sln
+
+      - name: Build Solution
+        run: |
+          msbuild.exe PrimeiroMVC5.sln /p:platform="Any CPU" /p:configuration="Release"
+        
